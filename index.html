@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="estilos">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<style>
+		img {
+			display: block;
+			margin: 0 auto;
+		}
+
+		.preguntas {
+			width: 400px;
+			margin:30px auto;
+			background: silver;
+			padding: 20px;
+			text-align: center; 
+		}
+
+		.segundoEstilo {
+			background: red;
+		}
+
+		.littleImg {
+			width: 400px;
+			height: 400px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div ng-controller="estilosP">
+
+		<img class="littleImg" ng-src="{{imagenActiva}}"><!--Cambiar la ruta de la imagen dinamicamente-->
+		<div ng-hide="ocultarImagen"><!--Ocultar el element-->
+			<img src="img.jpg" alt="#">
+		</div>
+		<div ng-switch="option">
+			<h2 ng-switch-when="a" style="text-align:center">Imagen 1</h2>
+			<h2 ng-switch-when="b" style="text-align:center">Imagen 2</h2>
+		</div>
+		<div class="preguntas" ng-style="estilosAngular" ng-class="color"><!--ng-style Para cambiar estilos-->
+			<button ng-click="opcionA()">Opcion A</button>
+			<button ng-click="opcionB()">Opcion B</button>
+			<hr>
+			<button ng-click="cambiarEstilo()"> Cambiar Estilo</button>
+			<button ng-click="CambiarClase()">Cambiar Clase</button>
+			<hr>
+			<button ng-click="ocultarCajas()">Ocultar Caja</button>
+			<button ng-click="mostrarCajas()">Mostrar Caja</button>
+		</div>
+
+	</div>
+
+
+	<script>
+		
+	var estilo = angular.module("estilos",[]);
+	estilo.controller('estilosP', function($scope){
+
+		$scope.imagenActiva = 'img2.png';
+
+		$scope.opcionA = function(){
+			$scope.option = "a";
+			$scope.imagenActiva = 'img2.png';  
+		}
+
+		$scope.opcionB = function(){
+			$scope.option = "b";
+			$scope.imagenActiva = 'img3.png';
+		}
+
+		$scope.cambiarEstilo = function(){
+			$scope.estilosAngular = { //objeto
+				width:"600px",
+				height:'200px',
+				borderRadius:'12px'
+			}
+		}
+
+		$scope.CambiarClase = function(){
+			$scope.color = 'segundoEstilo';//nombre de la clase que queremos aplicar el cambio
+		}
+
+		$scope.ocultarCajas = function(){
+			$scope.ocultarImagen = true;
+		}
+
+		$scope.mostrarCajas = function(){
+			$scope.ocultarImagen = false;
+		}
+
+	});
+
+	</script>
+</body>
+</html>
